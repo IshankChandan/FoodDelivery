@@ -1,10 +1,11 @@
 //Body Component 
 
 import RestaurantCard,{WithDiscountLabel} from "./RestaurantCard.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import UserContext from "../utils/UserContext.js";
 
 
 const Body = () => {
@@ -29,6 +30,9 @@ const Body = () => {
         
         
     },[]);
+
+    const {loggedInUser, setUserLogged} = useContext(UserContext);
+    console.log(listOfRestaurant)
     
     // if (listOfRestaurant.length === 0 ){
     //     return 
@@ -60,6 +64,13 @@ const Body = () => {
                             setFilteredList(searchRes);
                         }
                         }>Search</button>
+                        <span className="px-6 mx-6">
+                        <label className="font-medium">Enter User Name:
+                        <input className="bg-yellow-200 mx-4" defaultValue={loggedInUser} onChange={(e)=> setUserLogged(e.target.value)}></input>
+                         </label>
+                        
+                        </span>
+                        
                 </div>
                 <div>
                      <button className="m-5 px-5 bg-slate-200 rounded-md text-black font-semibold" onClick={()=>{
